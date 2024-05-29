@@ -159,7 +159,7 @@ void diamond(int n){
         printf("\n");
     }
 }  
-void butterfly(int n){
+/*void butterfly(int n){
     printf("\n\nButter fly \n");
     for(i=0;i<n;i++){
         for(j=0;j<=i;j++){
@@ -173,7 +173,7 @@ void butterfly(int n){
         }
         printf("\n");
     }
-    /*for(i=1;i<n;i++){
+    for(i=1;i<n;i++){
         for(j=0;j<n-i;j++){
             printf("*\t");
         }
@@ -181,8 +181,8 @@ void butterfly(int n){
             printf(" space ");
         }
         printf("\n");
-    }*/
-} 
+    }
+} */
 void main(){
     hollowRectagle(4,5);
     flipedPyramid(5);
@@ -196,5 +196,5 @@ void main(){
     hollowRhombus(4);
     halfDiamond(9);
     diamond(6);
-    butterfly(10);
+    //butterfly(10);
 }
