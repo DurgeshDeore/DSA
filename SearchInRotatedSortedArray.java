@@ -1,4 +1,5 @@
 //method = two pointers
+//better appraoch
 class Solution {
     int search(int[] arr, int key) {
         int l=0, r=arr.length-1;
