@@ -5,17 +5,18 @@ class Solution {
         for(int ele: nums1){
             map.put(ele,map.getOrDefault(ele,0)+1);
         }
-
         for(int ele: nums2){
-            if(map.containsKey(ele) && map.get(ele) > 0){
+            if(map.containsKey(ele) && map.get(ele)>0){
                 ans.add(ele);
-                map.put(ele,map.get(ele)-1);
+                map.put(ele, map.getOrDefault(ele,0)-1);
             }
+            
         }
-        int[] res = new int[ans.size()];
-        int i=0;
+        //for res in int[]
+        int res[] =new int[ans.size()];
+        int indx=0;
         for(int ele: ans){
-            res[i++]=ele;
+            res[indx++]=ele;
         }
         return res;
     }
