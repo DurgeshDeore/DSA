@@ -1,18 +1,18 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        if(nums.length <= 1){
-            return -1;
-        }
-        int freq[] = new int[nums.length];
-        for(int ele: nums){
-            freq[ele]++;
-        }
-        int indx=0;
-        for(int ele: freq){
-            if(ele > 1){
-                return indx;
+        int i=0;
+        while(i<nums.length){
+            int curr=nums[i]-1;
+            if(nums[i] != nums[curr]){
+                nums[curr] ^= nums[i];
+                nums[i] ^= nums[curr];
+                nums[curr] ^= nums[i];
+            }else{
+                i++;
             }
-            indx++;
+        }
+        for(i=0;i<nums.length;i++){
+            if(nums[i] != i+1) return nums[i];
         }
         return -1;
     }
