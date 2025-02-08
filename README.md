@@ -4,3 +4,5 @@ Solutions of DSA problems and there solutions
 1.2665 easy
 # Array
 1.3105 easy
+# Trie
+1.139 medium
