@@ -7,3 +7,4 @@ Solutions of DSA problems and there solutions
 # Trie
 1.139 medium
 2.Bounndry traversal
+3.14 Easy
