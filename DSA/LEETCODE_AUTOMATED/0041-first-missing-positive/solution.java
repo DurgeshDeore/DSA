@@ -1,7 +1,7 @@
 class Solution {
     public int firstMissingPositive(int[] nums) {
         int i=0;
-        while(i<nums.length){
+        while(i<nums.length){ //sortig
             int curr = nums[i]-1;
             if(nums[i]>0 && nums[i] < nums.length && nums[i] != nums[curr]){ //ignore -ve
                 nums[i] ^= nums[curr];
