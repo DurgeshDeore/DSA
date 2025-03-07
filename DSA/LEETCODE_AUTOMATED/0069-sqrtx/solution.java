@@ -1,8 +1,8 @@
 class Solution {
     public int mySqrt(int x) {
-        int l=1,r=x,mid=0;
+        int l=0,r=x;
         while(l<=r){
-            mid=l+(r-l)/2;
+            int mid=l+(r-l)/2;
             if((long)mid*mid > (long)x){
                 r=mid-1;
             }else if((long)mid*mid < (long)x){
@@ -11,6 +11,6 @@ class Solution {
                 return mid;
             }
         }
-        return Math.round(r);
+        return r;
     }
 }
