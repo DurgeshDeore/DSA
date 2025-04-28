@@ -1,0 +1,13 @@
+class Solution {
+    public int findNonMinOrMax(int[] nums) {
+        int min=Integer.MAX_VALUE, max=Integer.MIN_VALUE,res=-1;
+        for(int num: nums){
+            max=Math.max(num,max);
+            min=Math.min(num,min);
+        }
+        for(int num: nums){
+            if(num != min && num != max) res=num;
+        }
+        return res;
+    }
+}
