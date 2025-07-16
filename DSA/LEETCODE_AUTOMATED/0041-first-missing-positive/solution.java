@@ -1,21 +1,19 @@
 class Solution {
     public int firstMissingPositive(int[] nums) {
-        int i=0;
-        while(i<nums.length){ //sortig
-            int curr = nums[i]-1;
-            if(nums[i]>0 && nums[i] < nums.length && nums[i] != nums[curr]){ //ignore -ve
-                nums[i] ^= nums[curr];
-                nums[curr] ^= nums[i];
-                nums[i] ^= nums[curr];
+        int n=nums.length, i=0;
+        while(i<n){
+            int pos = nums[i]-1;
+            if(nums[i]<=n && nums[i] >0 && nums[i] != nums[pos]){
+                nums[i] ^= nums[pos];
+                nums[pos] ^= nums[i];
+                nums[i] ^= nums[pos];
             }else{
                 i++;
             }
         }
-        for(i=0;i<nums.length;i++){
-            if(nums[i] != i+1){
-                return i+1;
-            }
+        for(i=0; i<n; i++){
+            if(nums[i] != i+1) return i+1;
         }
-        return nums.length+1;
+        return n+1;
     }
 }
