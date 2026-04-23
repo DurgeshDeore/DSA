@@ -1,29 +1,26 @@
 class Solution {
-    // public int util(int i, int j, int m, int n){
-    //     if(i==m-1 && j==n-1) return 1;
-    //     if(i>m-1 || j>n-1) return 0;
-    //     int d=util(i+1, j, m, n);
-    //     int r=util(i, j+1, m, n);
-    //     return d+r;
+    // public int helper(int[][] dp, int m, int n, int i, int j){
+    //     if(i >= m || j>=n) return 0; 
+    //     else if(i == m-1 && j==n-1) return 1;
+    //     if(dp[i][j] != -1) return dp[i][j]; 
+    //     int r = helper(dp,m,n,i,j+1);
+    //     int d = helper(dp,m,n,i+1,j);
+    //     return dp[i][j]=r+d;
     // }
-    public int util(int i, int j, int m, int n, int[][] memo){
-        if(i==m-1 && j==n-1) return 1;
-        if(i>m-1 || j>n-1) return 0;
-        if(memo[i][j] != -1) return memo[i][j];
-        int d=util(i+1, j, m, n, memo);
-        int r=util(i, j+1, m, n, memo);
-        return memo[i][j] = d+r;
-    }
     public int uniquePaths(int m, int n) {
-        int memo[][] = new int[m+1][n+1];
-        for(int[] r: memo) Arrays.fill(r, -1);
-        // memo[1][1] = 1;
-        // for(int i=0; i<=m ;i++){
-        //     for(int j=0; j<=n; j++){
-        //         if(i>0 && j>0) memo[i][j] = memo[i-1][j]+memo[i][j-1];
-        //     }
-        // }
-        return util(0, 0, m, n, memo);
-        // return memo[m][n];
+        int[][] dp = new int[m][n];
+        // for(int[] row: dp) Arrays.fill(row, -1);
+        // return helper(dp,m,n,0,0);
+
+        Arrays.fill(dp[0], 1);
+        for(int i=1; i<m; i++) dp[i][0] = 1;
+
+        for(int i=1; i<m; i++){
+            for(int j=1; j<n; j++){
+                dp[i][j] = dp[i-1][j] + dp[i][j-1];
+            }
+        }
+
+        return dp[m-1][n-1];
     }
 }
