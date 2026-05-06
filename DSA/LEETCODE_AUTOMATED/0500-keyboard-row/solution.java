@@ -1,31 +1,32 @@
 class Solution {
-    public boolean isContains(String str,String word){
-        int i=1;
-        while(i<word.length()){
-            if(str.indexOf(word.charAt(i++))==-1){
-                return false;
-            }
-        }
-        return true;
-    }
     public String[] findWords(String[] words) {
-        ArrayList<String> res = new ArrayList<>();
-        String[] strs={ "qwertyuiopQWERTYUIOP", "asdfghjklASDFGHJKL", "zxcvbnmZXCVBNM"};
-        for(String word: words){
-            if(strs[0].indexOf(word.charAt(0)) != -1){
-                if(isContains(strs[0], word)){
-                    res.add(word);
+        HashSet<Character> r1 = new HashSet<>(Set.of('Q','W','E','R','T','Y','U','I','O','P'));
+        HashSet<Character> r2 = new HashSet<>(Set.of('A','S','D','F','G','H','J','K','L'));
+        HashSet<Character> r3 = new HashSet<>(Set.of('Z','X','C','V','B','N','M'));
+        ArrayList<String> cur = new ArrayList<>();
+        for(String s: words){
+            boolean flag = true;
+            String str = s.toUpperCase();
+            if(r1.contains(str.charAt(0))){
+                for(char c: str.toCharArray()){
+                    if(!r1.contains(c)) flag = false;
                 }
-            }else if(strs[1].indexOf(word.charAt(0)) != -1){
-                if(isContains(strs[1], word)){
-                    res.add(word);
+            }else if(r2.contains(str.charAt(0))){
+                for(char c: str.toCharArray()){
+                    if(!r2.contains(c)) flag = false;
                 }
-            }else if(strs[2].indexOf(word.charAt(0)) != -1){
-                if(isContains(strs[2], word)){
-                    res.add(word);
+            }else if(r3.contains(str.charAt(0))){
+                for(char c: str.toCharArray()){
+                    if(!r3.contains(c)) flag = false;
                 }
             }
+            if(flag) cur.add(s);
         }
-        return res.toArray(new String[0]);
+        if(cur.size() == 0) return new String[0];
+        String[] res = new String[cur.size()];
+        for(int i=0; i<cur.size(); i++){
+            res[i]=cur.get(i);
+        }
+        return res;
     }
 }
