@@ -1,14 +1,13 @@
 class Solution {
     public boolean check(int[] nums) {
-        int diff=0, cur=nums[0], n=nums.length;
+        int n=nums.length, diff=0;
         for(int i=1; i<n; i++){
-            if(cur > nums[i]){
-                diff +=1;
-                if(cur < nums[n-1] || nums[0] < nums[n-1]) return false;
+            if(nums[i-1] > nums[i]){
+                diff+=1;
+                if(nums[i-1] < nums[n-1] || nums[0] < nums[n-1]) return false;
             }
-            if(diff >= 2) return false;
-            cur = nums[i];
+            if(diff > 1) return false;
         }
-        return diff < 2;
+        return true;
     }
 }
