@@ -1,38 +1,33 @@
 class Solution {
-    public int[] rank;
-    public int[] parent;
-    public int find(int x){
-        if(parent[x] == x) return x;
-        return parent[x] = find(parent[x]); 
-    }
-    public boolean union(int a, int b){
-        int pa = find(a), pb = find(b);
-        if(pa == pb) return false;
-        if(rank[pa] >= rank[pb]){
-            parent[pb] = pa;
-            rank[pa]++;
-        }else{
-            parent[pa] = pb;
-            rank[pb]++;
+    public void traverse(ArrayList<ArrayList<Integer>> graph, boolean[] isVisited, int indx){
+        isVisited[indx] = true;
+        for(int neg: graph.get(indx)){
+            if(!isVisited[neg]) traverse(graph, isVisited, neg);
         }
-        return true;
     }
     public int findCircleNum(int[][] isConnected) {
-        int cnt = 0;
-        int n = isConnected.length;
-        rank = new int[n];
-        parent = new int[n];
-        for(int i=0; i<n; i++) parent[i] = i;
+        int n=isConnected.length, provinces=0;
+        boolean[] isVisited = new boolean[n];
+        
+        // create graph
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+        for(int i=0; i<n; i++) graph.add(new ArrayList<>());
+        
         for(int i=0; i<n; i++){
-            for(int j=0; j<n; j++){
-                if(isConnected[i][j] != 0 /*&& isConnected[j][i] != 0*/){
-                    // if(union(i, j)) cnt++;
-                    union(i,j);
-                }
+            int m = isConnected.length;
+            for(int j=0; j<m; j++){
+                if(isConnected[i][j] == 1) graph.get(i).add(j);
             }
         }
-        for(int i=0; i<n; i++) if(parent[i] == i) cnt++;
-        return cnt;
+
+        // traavese the graph and make it visible
+        for(int i=0; i<n; i++){
+            if(!isVisited[i]){
+                traverse(graph, isVisited, i);
+                provinces += 1;
+            }
+        }
+
+        return provinces;
     }
 }
-
