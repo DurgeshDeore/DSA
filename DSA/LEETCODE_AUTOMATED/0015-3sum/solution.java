@@ -1,27 +1,26 @@
 class Solution {
-    public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
+    public List<List<Integer>> threeSum(int[] nums) { // use 2 pointer approach
         int n = nums.length;
-        Arrays.sort(nums);
-        for(int i=0; i<n; i++){
-            if(i>0 && nums[i] == nums[i-1]) continue;
-            int j=i+1, k=n-1;
-            while(j<k){
-                int sum = nums[i]+nums[j]+nums[k];
+        List<List<Integer>> res = new ArrayList<>();
+
+        //sort Array
+        Arrays.sort(nums); 
+
+        for(int i=0; i<n-2; i++){
+            if(i>0 && nums[i] == nums[i-1]) continue; //skip duplicates
+            int l=i+1, r=n-1;
+            while(l<r){
+                int sum = nums[i] + nums[l] + nums[r];
                 if(sum > 0){
-                    k--;
+                    r--;
                 }else if(sum < 0){
-                    j++;
+                    l++;
                 }else{
-                    List<Integer> temp = new ArrayList<>();
-                    temp.add(nums[i]);
-                    temp.add(nums[j]);
-                    temp.add(nums[k]);
-                    res.add(temp);
-                    j++;
-                    k--;
-                    while(j<k && nums[j] == nums[j-1]) j++;
-                    while(j<k && nums[k] == nums[k+1]) k--;
+                    res.add(new ArrayList<>(List.of(nums[i], nums[l], nums[r])));
+                    l++;
+                    r--;
+                    while(l<r && nums[l-1] == nums[l]) l++; //skip duplicates
+                    while(l<r && nums[r] == nums[r+1]) r--;
                 }
             }
         }
