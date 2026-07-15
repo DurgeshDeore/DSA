@@ -1,11 +1,11 @@
 class Solution {
-    public int gcdOfOddEvenSums(int n) {
-        if(n==1 || n==2) return n;
-        int sumOfOdd=n*n, sumOfEven=n*(n+1);
-        int res=0;
-        for(int i=1; i<(Math.max(sumOfOdd, sumOfOdd)/2); i++){
-            if((sumOfOdd%i)==0 && (sumOfEven%i)==0) res = Math.max(i, res);
+    public int gcd(int odd, int even){
+        for(int i=even; i>=1; i--){
+            if((odd%i == 0) && (even%i == 0)) return i;
         }
-        return res;
+        return -1;
+    }
+    public int gcdOfOddEvenSums(int n) {
+        return gcd(n*n, (n*n)+n);
     }
 }
