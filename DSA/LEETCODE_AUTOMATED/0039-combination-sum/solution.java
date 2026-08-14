@@ -1,18 +1,23 @@
 class Solution {
-    public void util(int[] arr, List<List<Integer>> res, int rem, int i, ArrayList<Integer> cur){
-        if(rem == 0){
-            res.add(new ArrayList<>(cur));
+    List<List<Integer>> res = new ArrayList<>();
+
+    public void helper(int[] candidates, int target, ArrayList<Integer> curList, int curSum, int i) {
+        if(curSum >target || i == candidates.length) return;
+        if(curSum == target){
+            res.add(new ArrayList<>(curList));
             return;
         }
-        if(rem < 0 || i >= arr.length) return;
-        cur.add(arr[i]);
-        util(arr, res, rem-arr[i], i, cur);
-        cur.remove(cur.size()-1);
-        util(arr, res, rem, i+1, cur);
+        // if(curSum + candidates[i] <= target){
+            curList.add(candidates[i]);
+            helper(candidates, target, curList, curSum+candidates[i], i);
+            curList.remove(curList.size()-1);
+        // }else{
+            helper(candidates, target, curList, curSum, i+1);
+        // }
     }
+
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> res = new ArrayList<>();
-        util(candidates, res, target, 0, new ArrayList<>());
+        helper(candidates, target, new ArrayList<>(), 0, 0);
         return res;
     }
 }
