@@ -1,8 +1,5 @@
-# Write your MySQL query statement below
-SELECT t.id FROM Weather t
-JOIN 
-Weather p
-ON DATEDIFF(t.recordDate, p.recordDate) = 1
-AND t.temperature > p.temperature;
-
--- select * from Customers c join Orders o on c.id = o.id;
+SELECT w.id 
+FROM Weather w
+JOIN  Weather w1
+ON w.temperature > w1.temperature 
+    AND DATEDIFF(w.recordDate, w1.recordDate) = 1;
