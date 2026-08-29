@@ -1,15 +1,20 @@
 class Solution {
     public int romanToInt(String s) {
         int res = 0, n=s.length();
-        HashMap<Character, Integer> map = new HashMap<>(
-            Map.of('I', 1, 'V', 5, 'X', 10, 'L', 50, 'C', 100, 'D', 500, 'M', 1000)
-        );
+        Map<String, Integer> map = new LinkedHashMap<>(Map.ofEntries(
+            Map.entry("M", 1000), Map.entry("CM", 900), Map.entry("D", 500),
+            Map.entry("CD", 400), Map.entry("C", 100), Map.entry("XC", 90),
+            Map.entry("L", 50), Map.entry("XL", 40), Map.entry("X", 10),
+            Map.entry("IX", 9), Map.entry("V", 5), Map.entry("IV", 4),
+            Map.entry("I", 1)
+        ));
         for(int i=0; i<n; i++){
-            int cur = map.get(s.charAt(i));
-            if(i < n-1 && cur < map.get(s.charAt(i+1)))
-                res -= cur;
-            else 
-                res += cur;
+            if(i+1 < n && map.containsKey(s.substring(i, i+2))){
+                res += map.get(s.substring(i, i+2));
+                i+=1;
+            }else if(map.containsKey(s.substring(i, i+1))){
+                res += map.get(s.substring(i, i+1));
+            }
         }
         return res;
     }
