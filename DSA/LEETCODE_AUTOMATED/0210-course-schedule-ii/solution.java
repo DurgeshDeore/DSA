@@ -17,6 +17,7 @@ class Solution {
         isParentNode[node] = false;
         return false;
     }
+
     public void dfs(int node){ // topological sort for order off execution
         isVisited[node] = true;
         for(int neg: graph.get(node)){
