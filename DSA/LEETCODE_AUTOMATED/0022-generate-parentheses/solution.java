@@ -18,9 +18,11 @@ class Solution {
         }
     }
     public List<String> generateParenthesis(int n) {
+        // aproach 1: use backtrack
         N=n;
         res = new ArrayList<>();
         func(new StringBuilder(""), 0, 0);
         return res;
+
     }
 }
